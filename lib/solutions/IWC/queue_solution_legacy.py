@@ -150,12 +150,14 @@ class Queue:
                 metadata["group_earliest_timestamp"] = current_earliest
                 metadata["priority"] = priority_level
         newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
+        _fifo_order = {id(task): index for index, task in enumerate(self._queue)}
         self._queue.sort(
             key=lambda i: (
                 self._priority_for_task(i),
                 self._earliest_group_timestamp_for_task(i),
                 (i.provider == "bank_statements" and not self._is_old_bs(i, newest_ts)),
                 self._timestamp_for_task(i),
+                _fifo_order[id(i)]
             )
         )
 
@@ -264,4 +266,5 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 

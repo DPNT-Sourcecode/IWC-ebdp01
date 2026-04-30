@@ -1,0 +1,312 @@
+Selected action is: deploy
+Starting client
+Waiting for requests
+id = IWC_R5_S1_000, req = purge(), resp = true
+id = IWC_R5_S1_001, req = purge(), resp = true
+id = IWC_R5_S1_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S1_003, req = size(), resp = 1
+id = IWC_R5_S1_004, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S2_000, req = purge(), resp = true
+id = IWC_R5_S2_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S2_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S2_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":6}), resp = 3
+id = IWC_R5_S2_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S2_id = IWC_R5_S2_id = IWC_R5_S2_id = IWC_R5_S2_id = IWhoid = IWC_R5_S2_id = IWC_R5_S2_id 006id = IW dequeue(), resp = {"provider":"id_verification","user_id":6}
+id = IWC_R5_S3_000, req = purge(), resp = true
+id = IWC_R5_S3_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S3_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S3_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":1}), resp = 3
+id = IWC_R5_S3_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S3_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S3_006, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S4_000, req = purge(), resp = true
+id = IWC_R5_S4_001, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S4_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 2
+id = IWC_R5_S4_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":3}), resp = 3
+id = IWC_R5_S4_004, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S4_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S4_006, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+id = IWC_R5_S5_000, req = purge(), resp = true
+id = IWC_R5_S5_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S5_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 2
+id = IWC_R5_S5_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":6}), resp = 3
+id = IWC_R5_S5_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S5_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S5_006, req = dequeue(), resp = {"provider":"id_verification","user_id":6}
+id = IWC_R5_S6_000, req = purge(), resp = true
+id = IWC_R5_S6_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S6_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 2
+id = IWC_R5_S6_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":2}), resp = 3
+id = IWC_R5_S6_004, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S6_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S6_006, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S6_007, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S6_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S7_000, req = purge(), resp = true
+id = IWC_R5_S7_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 1
+id = IWC_R5_S7_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S7_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:02:00","user_id":2}), resp = 3
+id = IWC_R5_S7_004, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S7_005, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:08:00","user_id":1}), resp = 5
+id = IWC_R5_S7_006, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:09:00","user_id":1}), resp = 6
+id = IWC_R5_S7_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S7_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S7_009, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S7_010, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S7_011, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S7_012, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S8_000, req = purge(), resp = true
+id = IWC_R5_S8_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S8_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 2
+id = IWC_R5_S8_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":3}), resp = 3
+id = IWC_R5_S8_004, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":3}), resp = 4
+id = IWC_R5_S8_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S8_006, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S8_007, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+id = IWC_R5_S8_008, req = dequeue(), resp = {"provider":"id_verification","user_id":3}
+id = IWC_R5_S9_000, req = purge(), resp = true
+id = IWC_R5_S9_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S9_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 2
+id = IWC_R5_S9_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 3
+id = IWC_R5_S9_004, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S9_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S9_006, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S9_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S9_008, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S10_000, req = purge(), resp = true
+id = IWC_R5_S10_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S10_002, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S10_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:02:00","user_id":1}), resp = 3
+id = IWC_R5_S10_004, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:03:00","user_id":2}), resp = 4
+id = IWC_R5_S10_005, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S10_006, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S10_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S10_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S11_000, req = purge(), resp = true
+id = IWC_R5_S11_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 1
+id = IWC_R5_S11_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S11_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 3
+id = IWC_R5_S11_004, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S11_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S11_006, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S12_000, req = purge(), resp = true
+id = IWC_R5_S12_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 1
+id = IWC_R5_S12_002, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 2
+id = IWC_R5_S12_003, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 3
+id = IWC_R5_S12_004, req = enqueue({"provider":"credit_check","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 4
+id = IWC_R5_S12_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S12_006, req = dequeue(), resp = {"provider":"credit_check","user_id":1}
+id = IWC_R5_S12_007, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S12_008, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S13_000, req = purge(), resp = true
+id = IWC_R5_S13_001, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S13_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:02:00","user_id":2}), resp = 2
+id = IWC_R5_S13_003, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:02:00","user_id":1}), resp = 3
+id = IWC_R5_S13_004, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:03:00","user_id":1}), resp = 4
+id = IWC_R5_S13_005, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:10:00","user_id":3}), resp = 5
+id = IWC_R5_S13_006, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S13_007, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S13_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S13_009, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S13_010, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+Stopping client
+Notify round "IWC_R5", event "deploy"
+--------------------------------------------
+
+Result is: FAILED
+Some requests have failed (9/109). Here are some of them:
+
+Test: IWC_R5_S7_010 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"bank_statements","user_id":2}
+Actual:   {"provider":"companies_house","user_id":1}
+
+----------------------------------------
+
+Test: IWC_R5_S7_011 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"companies_house","user_id":1}
+Actual:   {"provider":"id_verification","user_id":1}
+
+----------------------------------------
+
+Test: IWC_R5_S7_012 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"id_verification","user_id":1}
+Actual:   {"provider":"bank_statements","user_id":2}
+
+----------------------------------------
+
+You have received a penalty of: 10 min
+The round will restart now
+
+Look at your failed trials and edit your code. When you've finished, deploy your code with "deploy"
+
+Challenge description saved to file: challenges/IWC_R5.txt.
+((.venv) ) titikshasharma@Titikshas-MacBook-Pro accelerate_runner new %        PYTHONPATH=lib python lib/send_command_to_server.py
+
+Connecting to run.accelerate.io
+
+Your progress (2/3):
+ ✓ SUM (1 round)  -   warmup - completed in 3 min (+0 min penalty)
+      └── SUM_R1  - completed in 3 min (+0 min penalty)
+ ✓ HLO (2 rounds) -   warmup - completed in 6 min (+40 min penalty)
+      ├── HLO_R1  - completed in 4 min (+20 min penalty)
+      └── HLO_R2  - completed in 1 min (+20 min penalty)
+ @ IWC (5 rounds) - official - Backend Recruitment Task
+      ├── IWC_R1  - completed in 14 min (+0 min penalty)
+      ├── IWC_R2  - completed in 29 min (+10 min penalty)
+      ├── IWC_R3  - completed in 10 min (+0 min penalty)
+      ├── IWC_R4  - completed in 4 min (+10 min penalty)
+      └── IWC_R5  - running for 39 min (+30 min penalty)
+---------------------
+
+Type "deploy" if you have answered all the requests. 
+Type "pause" if you need a break. 
+
+> deploy
+Selected action is: deploy
+Starting client
+Waiting for requests
+id = IWC_R5_S1_000, req = purge(), resp = true
+id = IWC_R5_S1_001, req = purge(), resp = true
+id = IWC_R5_S1_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S1_003, req = size(), resp = 1
+id = IWC_R5_S1_004, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S2_000, req = purge(), resp = true
+id = IWC_R5_S2_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S2_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S2_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":6}), resp = 3
+id = IWC_R5_S2_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S2_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S2_006, req = dequeue(), resp = {"provider":"id_verification","user_id":6}
+id = IWC_R5_S3_000, req = purge(), resp = true
+id = IWC_R5_S3_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S3_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S3_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":1}), resp = 3
+id = IWC_R5_S3_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S3_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S3_006, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S4_000, req = purge(), resp = true
+id = IWC_R5_S4_001, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S4_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 2
+id = IWC_R5_S4_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":3}), resp = 3
+id = IWC_R5_S4_004, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S4_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S4_006, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+id = IWC_R5_S5_000, req = purge(), resp = true
+id = IWC_R5_S5_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S5_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 2
+id = IWC_R5_S5_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":6}), resp = 3
+id = IWC_R5_S5_004, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S5_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S5_006, req = dequeue(), resp = {"provider":"id_verification","user_id":6}
+id = IWC_R5_S6_000, req = purge(), resp = true
+id = IWC_R5_S6_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S6_002, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 2
+id = IWC_R5_S6_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:06:00","user_id":2}), resp = 3
+id = IWC_R5_S6_004, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S6_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S6_006, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S6_007, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S6_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S7_000, req = purge(), resp = true
+id = IWC_R5_S7_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 1
+id = IWC_R5_S7_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S7_003, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:02:00","user_id":2}), resp = 3
+id = IWC_R5_S7_004, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S7_005, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:08:00","user_id":1}), resp = 5
+id = IWC_R5_S7_006, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:09:00","user_id":1}), resp = 6
+id = IWC_R5_S7_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S7_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S7_009, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S7_010, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S7_011, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S7_012, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S8_000, req = purge(), resp = true
+id = IWC_R5_S8_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S8_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 2
+id = IWC_R5_S8_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":3}), resp = 3
+id = IWC_R5_S8_004, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":3}), resp = 4
+id = IWC_R5_S8_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S8_006, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S8_007, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+id = IWC_R5_S8_008, req = dequeue(), resp = {"provider":"id_verification","user_id":3}
+id = IWC_R5_S9_000, req = purge(), resp = true
+id = IWC_R5_S9_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S9_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 2
+id = IWC_R5_S9_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:01:00","user_id":2}), resp = 3
+id = IWC_R5_S9_004, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":2}), resp = 4
+id = IWC_R5_S9_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S9_006, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S9_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S9_008, req = dequeue(), resp = {"provider":"id_verification","user_id":2}
+id = IWC_R5_S10_000, req = purge(), resp = true
+id = IWC_R5_S10_001, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S10_002, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S10_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:02:00","user_id":1}), resp = 3
+id = IWC_R5_S10_004, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:03:00","user_id":2}), resp = 4
+id = IWC_R5_S10_005, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S10_006, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S10_007, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S10_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S11_000, req = purge(), resp = true
+id = IWC_R5_S11_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 1
+id = IWC_R5_S11_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 2
+id = IWC_R5_S11_003, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:00:00","user_id":2}), resp = 3
+id = IWC_R5_S11_004, req = dequeue(), resp = {"provider":"companies_house","user_id":2}
+id = IWC_R5_S11_005, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S11_006, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S12_000, req = purge(), resp = true
+id = IWC_R5_S12_001, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 1
+id = IWC_R5_S12_002, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:07:00","user_id":1}), resp = 2
+id = IWC_R5_S12_003, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:01:00","user_id":1}), resp = 3
+id = IWC_R5_S12_004, req = enqueue({"provider":"credit_check","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 4
+id = IWC_R5_S12_005, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S12_006, req = dequeue(), resp = {"provider":"credit_check","user_id":1}
+id = IWC_R5_S12_007, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S12_008, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S13_000, req = purge(), resp = true
+id = IWC_R5_S13_001, req = enqueue({"provider":"id_verification","timestamp":"2025-10-20 12:00:00","user_id":1}), resp = 1
+id = IWC_R5_S13_002, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:02:00","user_id":2}), resp = 2
+id = IWC_R5_S13_003, req = enqueue({"provider":"bank_statements","timestamp":"2025-10-20 12:02:00","user_id":1}), resp = 3
+id = IWC_R5_S13_004, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:03:00","user_id":1}), resp = 4
+id = IWC_R5_S13_005, req = enqueue({"provider":"companies_house","timestamp":"2025-10-20 12:10:00","user_id":3}), resp = 5
+id = IWC_R5_S13_006, req = dequeue(), resp = {"provider":"id_verification","user_id":1}
+id = IWC_R5_S13_007, req = dequeue(), resp = {"provider":"bank_statements","user_id":1}
+id = IWC_R5_S13_008, req = dequeue(), resp = {"provider":"bank_statements","user_id":2}
+id = IWC_R5_S13_009, req = dequeue(), resp = {"provider":"companies_house","user_id":1}
+id = IWC_R5_S13_010, req = dequeue(), resp = {"provider":"companies_house","user_id":3}
+Stopping client
+Notify round "IWC_R5", event "deploy"
+--------------------------------------------
+
+Result is: FAILED
+Some requests have failed (9/109). Here are some of them:
+
+Test: IWC_R5_S7_010 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"bank_statements","user_id":2}
+Actual:   {"provider":"companies_house","user_id":1}
+
+----------------------------------------
+
+Test: IWC_R5_S7_011 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"companies_house","user_id":1}
+Actual:   {"provider":"id_verification","user_id":1}
+
+----------------------------------------
+
+Test: IWC_R5_S7_012 | Method: dequeue | Params: []
+Assertion: equals
+Expected: {"provider":"id_verification","user_id":1}
+Actual:   {"provider":"bank_statements","user_id":2}
+
+----------------------------------------
+
+You have received a penalty of: 10 min
+The round will restart now
+
+Look at your failed trials and edit your code. When you've finished, deploy your code with "deploy"
+

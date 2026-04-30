@@ -159,7 +159,13 @@ class Queue:
             provider=task.provider,
             user_id=task.user_id,
         )
-
+    @property
+    def age(self):
+        if not self._queue:
+            return 0
+        timestamps = [self._timestamp_for_task(task) for task in self._queue]
+        return int((max(timestamps) - min(timestamps)).total_seconds())
+    
     @property
     def size(self):
         return len(self._queue)
@@ -256,3 +262,4 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+

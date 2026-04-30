@@ -172,7 +172,7 @@ class Queue:
             key=lambda t: (
                 self._adjusted_sort_ts(t, newest_ts),
                 self._priority_for_task(t).value,
-                self._earliest_group_timestamp_for_task(i),
+                self._earliest_group_timestamp_for_task(t),
                 self._young_bank_tail_penalty(t, newest_ts),
                 self._stale_bank_same_ts_rank(t, newest_ts),
                 self._timestamp_for_task(t),
@@ -285,6 +285,7 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 
 
 

@@ -96,7 +96,6 @@ class Queue:
         tasks = [*self._collect_dependencies(item), item]
 
         for task in tasks:
-            # consider duplicate task when same user has same provider waiting in queue
             key = (task.user_id, task.provider)
             existing_task = self._task_map.get(key)
 
@@ -111,72 +110,31 @@ class Queue:
             self._queue.append(task)
             self._task_map[key] = task
         return self.size
-
+    
     def dequeue(self):
+        """Return the next task using R1-R5 queue ordering rules."""
         if self.size == 0:
             return None
 
-        _fifo_positions = {id(task): idx for idx, task in enumerate(self._queue)}
-        newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
-
-        def age_seconds(task):
-            return (newest_ts - self._timestamp_for_task(task)).total_seconds()
-        
-        promoted_bank = []
-        normal_bank = []
-        others = []
-
-        for task in self._queue:
-            if task.provider != "bank_statements":
-                others.append(task)
-                continue
-            if age_seconds(task)>=300:
-                promoted_bank.append(task)
-            else:
-                normal_bank.append(task)
-
-        def priority(task):
-            metadata = task.metadata
-            raw_priority = metadata.get("priority", Priority.NORMAL)
-            try:
-                return Priority(raw_priority)
-            except (TypeError, ValueError):
-                return Priority.NORMAL
-            
-        def group_ts(task):
-            return task.metadata.get("group_earliest_timestamp", MAX_TIMESTAMP)
-        
-        def timestamp(task):
-            t = task.timestamp
-            if isinstance(t, datetime):
-                return t.replace(tzinfo=None)
-            if isinstance(t, str):
-                return datetime.fromisoformat(t).replace(tzinfo=None)
-            return t
-        
-
-        def stale_bank_rank(task):
-            return task.provider == "bank_statements" and age_seconds(task)>=300
-        
-        def young_bank_penalty(task):
-            return task.provider == "bank_statements" and age_seconds(task)<300
+        fifo_positions = {id(task): idx for idx, task in enumerate(self._queue)}
 
         user_ids = {task.user_id for task in self._queue}
         task_count = {}
         priority_timestamps = {}
+
         for user_id in user_ids:
             user_tasks = [t for t in self._queue if t.user_id == user_id]
             earliest_task = min(
                 user_tasks,
-                key=lambda t: (self._timestamp_for_task(t), _fifo_positions[id(t)])
+                key=lambda t: (self._timestamp_for_task(t), fifo_positions[id(t)]),
             )
-            earliest_timestamp = earliest_task.timestamp
-            priority_timestamps[user_id] = earliest_timestamp
+            priority_timestamps[user_id] = earliest_task.timestamp
             task_count[user_id] = len(user_tasks)
 
         for task in self._queue:
             metadata = task.metadata
             raw_priority = metadata.get("priority")
+
             try:
                 priority_level = Priority(raw_priority)
             except (TypeError, ValueError):
@@ -184,6 +142,7 @@ class Queue:
 
             if priority_level is None or priority_level == Priority.NORMAL:
                 metadata["group_earliest_timestamp"] = MAX_TIMESTAMP
+
                 if task_count[task.user_id] >= 3:
                     metadata["group_earliest_timestamp"] = priority_timestamps[task.user_id]
                     metadata["priority"] = Priority.HIGH
@@ -193,26 +152,48 @@ class Queue:
                 metadata["group_earliest_timestamp"] = metadata.get(
                     "group_earliest_timestamp", MAX_TIMESTAMP
                 )
-        pool_main = others + promoted_bank
-        pool_secondary = normal_bank
-        def sort_key(t):
-            return (
-                timestamp(t),
-                priority(t).value,
-                group_ts(t),
-                young_bank_penalty(t),
-                stale_bank_rank(t),
-                _fifo_positions[id(t)]
+
+        newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
+
+        def is_old_bank(task):
+            """Bank statements becomes time-sensitive after 5 minutes in queue age."""
+            if task.provider != "bank_statements":
+                return False
+            age_seconds = (
+                newest_ts - self._timestamp_for_task(task)
+            ).total_seconds()
+            return age_seconds >= 300
+
+        has_old_bank = any(is_old_bank(task) for task in self._queue)
+
+        if has_old_bank:
+
+            self._queue.sort(
+                key=lambda task: (
+                    self._timestamp_for_task(task),
+                    0 if is_old_bank(task) else 1,
+                    fifo_positions[id(task)],
+                )
             )
-        pool_main.sort(key=sort_key)
-        pool_secondary.sort(key=sort_key)
-        self._queue = pool_main + pool_secondary
+        else:
+            self._queue.sort(
+                key=lambda task: (
+                    self._priority_for_task(task).value,
+                    self._earliest_group_timestamp_for_task(task),
+                    task.provider == "bank_statements",
+                    self._timestamp_for_task(task),
+                    fifo_positions[id(task)],
+                )
+            )
+
         task = self._queue.pop(0)
         self._task_map.pop((task.user_id, task.provider), None)
+
         return TaskDispatch(
             provider=task.provider,
             user_id=task.user_id,
         )
+
     @property
     def age(self):
         if not self._queue:
@@ -312,3 +293,4 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+

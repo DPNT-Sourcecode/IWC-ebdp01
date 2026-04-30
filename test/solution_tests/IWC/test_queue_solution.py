@@ -57,4 +57,3 @@ def test_duplicate_with_older_timestamp_replaces_existing_timestamp() -> None:
         call_dequeue().expect("bank_statements", 1),
     ])
 
-

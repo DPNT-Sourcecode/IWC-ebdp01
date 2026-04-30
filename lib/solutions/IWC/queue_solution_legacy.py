@@ -91,6 +91,12 @@ class Queue:
             return datetime.fromisoformat(timestamp).replace(tzinfo=None)
         return timestamp
 
+    def _is_old_bs(self, task, newest_ts):
+        if task.provider != "bank_statements":
+            return False
+        task_ts = self._timestamp_for_task(task)
+        return (newest_ts - task_ts).total_seconds() >= 300
+
     def enqueue(self, item: TaskSubmission) -> int:
         tasks = [*self._collect_dependencies(item), item]
 
@@ -143,11 +149,12 @@ class Queue:
             else:
                 metadata["group_earliest_timestamp"] = current_earliest
                 metadata["priority"] = priority_level
-
+        newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
         self._queue.sort(
             key=lambda i: (
                 self._priority_for_task(i),
                 self._earliest_group_timestamp_for_task(i),
+                0 if self.self._is_old_bs(i, newest_ts) else 1,
                 i.provider == "bank_statements",
                 self._timestamp_for_task(i),
             )
@@ -258,5 +265,6 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 
 

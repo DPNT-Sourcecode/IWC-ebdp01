@@ -50,6 +50,7 @@ REGISTERED_PROVIDERS: list[Provider] = [
 class Queue:
     def __init__(self):
         self._queue = []
+        self._task_map = {}
 
     def _collect_dependencies(self, task: TaskSubmission) -> list[TaskSubmission]:
         provider = next((p for p in REGISTERED_PROVIDERS if p.name == task.provider), None)
@@ -95,15 +96,9 @@ class Queue:
 
         for task in tasks:
             # consider duplicate task when same user has same provider waiting in queue
-            existing_task = next(
-                (
-                    queued_task 
-                    for queued_task in self._queue
-                    if queued_task.user_id == task.user_id
-                    and queued_task.provider == task.provider
-                ),
-                None,
-            )
+            key = (task.user_id, task.provider)
+            existing_task = self._task_map.get(key)
+
             if existing_task is not None:
                 if self._timestamp_for_task(task) < self._timestamp_for_task(existing_task):
                     existing_task.timestamp = task.timestamp
@@ -113,6 +108,7 @@ class Queue:
             metadata.setdefault("priority", Priority.NORMAL)
             metadata.setdefault("group_earliest_timestamp", MAX_TIMESTAMP)
             self._queue.append(task)
+            self._task_map[key] = task
         return self.size
 
     def dequeue(self):
@@ -157,6 +153,7 @@ class Queue:
         )
 
         task = self._queue.pop(0)
+        self._task_map.pop((task.user_id, task.provider), None)
         return TaskDispatch(
             provider=task.provider,
             user_id=task.user_id,
@@ -172,6 +169,7 @@ class Queue:
 
     def purge(self):
         self._queue.clear()
+        self._task_map.clear()
         return True
 
 """
@@ -257,4 +255,5 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 

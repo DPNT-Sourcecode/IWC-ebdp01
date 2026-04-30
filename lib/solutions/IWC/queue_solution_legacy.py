@@ -170,10 +170,6 @@ class Queue:
     def size(self):
         return len(self._queue)
 
-    @property
-    def age(self):
-        return 0
-
     def purge(self):
         self._queue.clear()
         self._task_map.clear()
@@ -262,4 +258,5 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 

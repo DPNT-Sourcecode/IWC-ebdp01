@@ -94,6 +94,7 @@ class Queue:
         tasks = [*self._collect_dependencies(item), item]
 
         for task in tasks:
+            # consider duplicate task when same user has same provider waiting in queue
             existing_task = next(
                 (
                     queued_task 
@@ -107,7 +108,7 @@ class Queue:
                 if self._timestamp_for_task(task) < self._timestamp_for_task(existing_task):
                     existing_task.timestamp = task.timestamp
                 continue
-            
+
             metadata = task.metadata
             metadata.setdefault("priority", Priority.NORMAL)
             metadata.setdefault("group_earliest_timestamp", MAX_TIMESTAMP)
@@ -256,3 +257,4 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+

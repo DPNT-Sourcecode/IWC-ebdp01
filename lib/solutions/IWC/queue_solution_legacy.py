@@ -154,7 +154,7 @@ class Queue:
             key=lambda i: (
                 self._priority_for_task(i),
                 self._earliest_group_timestamp_for_task(i),
-                0 if self.self._is_old_bs(i, newest_ts) else 1,
+                0 if self._is_old_bs(i, newest_ts) else 1,
                 i.provider == "bank_statements",
                 self._timestamp_for_task(i),
             )
@@ -265,6 +265,3 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
-
-
-

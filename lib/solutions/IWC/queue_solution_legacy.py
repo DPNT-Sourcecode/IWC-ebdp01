@@ -94,6 +94,20 @@ class Queue:
         tasks = [*self._collect_dependencies(item), item]
 
         for task in tasks:
+            existing_task = next(
+                (
+                    queued_task 
+                    for queued_task in self._queue
+                    if queued_task.user_id == task.user_id
+                    and queued_task.provider == task.provider
+                ),
+                None,
+            )
+            if existing_task is not None:
+                if self._timestamp_for_task(task) < self._timestamp_for_task(existing_task):
+                    existing_task.timestamp = task.timestamp
+                continue
+            
             metadata = task.metadata
             metadata.setdefault("priority", Priority.NORMAL)
             metadata.setdefault("group_earliest_timestamp", MAX_TIMESTAMP)

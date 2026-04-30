@@ -91,24 +91,6 @@ class Queue:
             return datetime.fromisoformat(timestamp).replace(tzinfo=None)
         return timestamp
 
-    def _is_old_bs(self, task, newest_ts):
-        if task.provider != "bank_statements":
-            return False
-        task_ts = self._timestamp_for_task(task)
-        return (newest_ts - task_ts).total_seconds() >= 300
-
-    def _adjusted_sort_ts(self, task, newest_ts):
-        if task.provider == "bank_statements" and not self._is_old_bs(task, newest_ts):
-            return MAX_TIMESTAMP
-        return self._timestamp_for_task(task)
-    
-    def _stale_bank_same_ts_rank(self, task, newest_ts):
-        if task.provider == "bank_statements" and self._is_old_bs(task, newest_ts):
-            return 0
-        return 1
-    
-    def _young_bank_tail_penalty(self, task, newest_ts):
-        return task.provider == "bank_statements" and not self._is_old_bs(task, newest_ts)
 
     def enqueue(self, item: TaskSubmission) -> int:
         tasks = [*self._collect_dependencies(item), item]
@@ -134,10 +116,54 @@ class Queue:
         if self.size == 0:
             return None
 
+        _fifo_positions = {id(task): idx for idx, task in enumerate(self._queue)}
+        newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
+
+        def age_seconds(task):
+            return (newest_ts - self._timestamp_for_task(task)).total_seconds()
+        
+        promoted_bank = []
+        normal_bank = []
+        others = []
+
+        for task in self._queue:
+            if task.provider != "bank_statements":
+                others.append(task)
+                continue
+            if age_seconds(task)>=300:
+                promoted_bank.append(task)
+            else:
+                normal_bank.append(task)
+
+        def priority(task):
+            metadata = task.metadata
+            raw_priority = metadata.get("priority", Priority.NORMAL)
+            try:
+                return Priority(raw_priority)
+            except (TypeError, ValueError):
+                return Priority.NORMAL
+            
+        def group_ts(task):
+            return task.metadata.get("group_earliest_timestamp", MAX_TIMESTAMP)
+        
+        def timestamp(task):
+            t = task.timestamp
+            if isinstance(t, datetime):
+                return t.replace(tzinfo=None)
+            if isinstance(t, str):
+                return datetime.fromisoformat(t).replace(tzinfo=None)
+            return t
+        
+
+        def stale_bank_rank(task):
+            return task.provider == "bank_statements" and age_seconds(task)>=300
+        
+        def young_bank_penalty(task):
+            return task.provider == "bank_statements" and age_seconds(task)<300
+
         user_ids = {task.user_id for task in self._queue}
         task_count = {}
         priority_timestamps = {}
-        _fifo_positions = {id(task): idx for idx, task in enumerate(self._queue)}
         for user_id in user_ids:
             user_tasks = [t for t in self._queue if t.user_id == user_id]
             earliest_task = min(
@@ -150,7 +176,6 @@ class Queue:
 
         for task in self._queue:
             metadata = task.metadata
-            current_earliest = metadata.get("group_earliest_timestamp", MAX_TIMESTAMP)
             raw_priority = metadata.get("priority")
             try:
                 priority_level = Priority(raw_priority)
@@ -165,21 +190,23 @@ class Queue:
                 else:
                     metadata["priority"] = Priority.NORMAL
             else:
-                metadata["group_earliest_timestamp"] = current_earliest
-                metadata["priority"] = priority_level
-        newest_ts = max(self._timestamp_for_task(task) for task in self._queue)
-        self._queue.sort(
-            key=lambda t: (
-                self._adjusted_sort_ts(t, newest_ts),
-                self._priority_for_task(t).value,
-                self._earliest_group_timestamp_for_task(t),
-                self._young_bank_tail_penalty(t, newest_ts),
-                self._stale_bank_same_ts_rank(t, newest_ts),
-                self._timestamp_for_task(t),
+                metadata["group_earliest_timestamp"] = metadata.get(
+                    "group_earliest_timestamp", MAX_TIMESTAMP
+                )
+        pool_main = others + promoted_bank
+        pool_secondary = normal_bank
+        def sort_key(t):
+            return (
+                timestamp(t),
+                priority(t).value,
+                group_ts(t),
+                young_bank_penalty(t),
+                stale_bank_rank(t),
                 _fifo_positions[id(t)]
             )
-        )
-
+        pool_main.sort(key=sort_key)
+        pool_secondary.sort(key=sort_key)
+        self._queue = pool_main + pool_secondary
         task = self._queue.pop(0)
         self._task_map.pop((task.user_id, task.provider), None)
         return TaskDispatch(
@@ -285,3 +312,4 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+

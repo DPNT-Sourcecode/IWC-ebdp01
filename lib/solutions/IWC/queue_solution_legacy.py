@@ -97,6 +97,19 @@ class Queue:
         task_ts = self._timestamp_for_task(task)
         return (newest_ts - task_ts).total_seconds() >= 300
 
+    def _adjusted_sort_ts(self, task, newest_ts):
+        if task.provider == "bank_statements" and not self._is_old_bs(task, newest_ts):
+            return MAX_TIMESTAMP
+        return self._timestamp_for_task(task)
+    
+    def _stale_bank_same_ts_rank(self, task, newest_ts):
+        if task.provider == "bank_statements" and self._is_old_bs(task, newest_ts):
+            return 0
+        return 1
+    
+    def _young_tail_penalty(self, task, newest_ts):
+        return task.provider == "bank_statements" and not self._is_old_bs(task, newest_ts)
+
     def enqueue(self, item: TaskSubmission) -> int:
         tasks = [*self._collect_dependencies(item), item]
 
@@ -271,6 +284,7 @@ async def queue_worker():
         logger.info(f"Finished task: {task}")
 ```
 """
+
 
 
 

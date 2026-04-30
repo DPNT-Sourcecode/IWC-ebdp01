@@ -37,3 +37,23 @@ def test_credit_check_adds_companies_house_dependency() -> None:
         call_dequeue().expect("companies_house", 1),
         call_dequeue().expect("credit_check", 1),
     ])
+
+def test_duplicate_user_provider_keeps_one_oldest_task() -> None:
+    run_queue([
+        call_enqueue("bank_statements", 1, iso_ts(delta_minutes=0)).expect(1),
+        call_enqueue("bank_statements", 1, iso_ts(delta_minutes=5)).expect(1),
+        call_enqueue("id_verification", 1, iso_ts(delta_minutes=5)).expect(2),
+        call_dequeue().expect("bank_statements", 1),
+        call_dequeue().expect("id_verification", 1),
+    ])
+
+
+def test_duplicate_with_older_timestamp_replaces_existing_timestamp() -> None:
+    run_queue([
+        call_enqueue("bank_statements", 1, iso_ts(delta_minutes=5)).expect(1),
+        call_enqueue("bank_statements", 1, iso_ts(delta_minutes=0)).expect(1),
+        call_enqueue("companies_house", 2, iso_ts(delta_minutes=2)).expect(2),
+        call_dequeue().expect("bank_statements", 1),
+        call_dequeue().expect("companies_house", 2),
+    ])
+
